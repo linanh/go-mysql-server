@@ -17,8 +17,8 @@ package function
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
 )
 
 // IsNull is a function that returns whether a value is null or not.

@@ -25,7 +25,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 const debugAnalyzerKey = "DEBUG_ANALYZER"
@@ -278,9 +278,9 @@ func (a *Analyzer) Log(msg string, args ...interface{}) {
 	if a != nil && a.Debug {
 		if len(a.contextStack) > 0 {
 			ctx := strings.Join(a.contextStack, "/")
-			logrus.Infof("%s: "+msg, append([]interface{}{ctx}, args...)...)
+			logrus.Infof("mysql/server %s: "+msg, append([]interface{}{ctx}, args...)...)
 		} else {
-			logrus.Infof(msg, args...)
+			logrus.Infof("mysql/server "+msg, args...)
 		}
 	}
 }
@@ -290,9 +290,9 @@ func (a *Analyzer) LogNode(n sql.Node) {
 	if a != nil && n != nil && a.Verbose {
 		if len(a.contextStack) > 0 {
 			ctx := strings.Join(a.contextStack, "/")
-			logrus.Infof("%s:\n%s", ctx, sql.DebugString(n))
+			logrus.Infof("mysql/server %s:\n%s", ctx, sql.DebugString(n))
 		} else {
-			logrus.Infof("%s", sql.DebugString(n))
+			logrus.Infof("mysql/server %s", sql.DebugString(n))
 		}
 	}
 }

@@ -15,7 +15,7 @@
 package plan
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 // Visitor visits nodes in the plan.

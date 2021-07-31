@@ -17,8 +17,8 @@ package aggregation
 import (
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
 )
 
 // Last aggregation returns the last of all values in the selected column.

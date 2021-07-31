@@ -17,12 +17,12 @@ package main
 import (
 	"time"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/auth"
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/server"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/information_schema"
+	sqle "github.com/linanh/go-mysql-server"
+	"github.com/linanh/go-mysql-server/auth"
+	"github.com/linanh/go-mysql-server/memory"
+	"github.com/linanh/go-mysql-server/server"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/information_schema"
 )
 
 // Example of how to implement a MySQL server based on a Engine:

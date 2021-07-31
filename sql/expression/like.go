@@ -21,8 +21,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/dolthub/go-mysql-server/internal/regex"
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/internal/regex"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 func newDefaultLikeMatcher(likeStr string) (regex.DisposableMatcher, error) {

@@ -15,9 +15,9 @@
 package analyzer
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql/plan"
 )
 
 // Scope of the analysis being performed, used when analyzing subqueries to give such analysis access to outer scope.

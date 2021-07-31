@@ -24,10 +24,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	sqle "github.com/dolthub/go-mysql-server"
+	sqle "github.com/linanh/go-mysql-server"
 
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/memory"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 var scriptsPath = "../_scripts/tpc-h/"

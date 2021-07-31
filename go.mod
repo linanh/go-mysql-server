@@ -1,4 +1,4 @@
-module github.com/dolthub/go-mysql-server
+module github.com/linanh/go-mysql-server
 
 require (
 	github.com/VividCortex/gohistogram v1.0.0 // indirect

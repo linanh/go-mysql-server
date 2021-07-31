@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dolthub/go-mysql-server/driver"
+	"github.com/linanh/go-mysql-server/driver"
 )
 
 type V = interface{}

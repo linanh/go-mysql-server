@@ -17,7 +17,7 @@ package enginetest
 import (
 	"math"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 var VariableQueries = []ScriptTest{

@@ -15,13 +15,14 @@
 package server
 
 import (
+	"net"
 	"time"
 
 	"github.com/dolthub/vitess/go/mysql"
 	"github.com/opentracing/opentracing-go"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/auth"
+	sqle "github.com/linanh/go-mysql-server"
+	"github.com/linanh/go-mysql-server/auth"
 )
 
 // Server is a MySQL server for SQLe engines.
@@ -49,6 +50,7 @@ type Config struct {
 	ConnWriteTimeout time.Duration
 	// MaxConnections is the maximum number of simultaneous connections that the server will allow.
 	MaxConnections uint64
+	Listener       net.Listener
 }
 
 // NewDefaultServer creates a Server with the default session builder.
@@ -87,7 +89,16 @@ func NewServer(cfg Config, e *sqle.Engine, sb SessionBuilder) (*Server, error) {
 			cfg.Address),
 		cfg.ConnReadTimeout)
 	a := cfg.Auth.Mysql()
-	l, err := NewListener(cfg.Protocol, cfg.Address, handler)
+
+	var l *Listener
+	var err error
+	if cfg.Listener == nil {
+		cfg.Listener, err = net.Listen(cfg.Protocol, cfg.Address)
+		if err != nil {
+			return nil, err
+		}
+	}
+	l, err = NewListener(handler, cfg.Listener)
 	if err != nil {
 		return nil, err
 	}

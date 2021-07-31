@@ -22,7 +22,7 @@ import (
 
 	opentracing "github.com/opentracing/opentracing-go"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 const (

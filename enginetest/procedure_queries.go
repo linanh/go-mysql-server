@@ -17,9 +17,9 @@ package enginetest
 import (
 	"time"
 
-	"github.com/dolthub/go-mysql-server/sql/parse"
+	"github.com/linanh/go-mysql-server/sql/parse"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 var ProcedureLogicTests = []ScriptTest{

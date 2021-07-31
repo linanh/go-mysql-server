@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
 )
 
 // ShowVariables is a node that shows the global and session variables

@@ -21,8 +21,8 @@ import (
 	"github.com/dolthub/vitess/go/sqltypes"
 	"github.com/stretchr/testify/require"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/sql"
+	sqle "github.com/linanh/go-mysql-server"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 // returns whether to include the table name given in the test data setup. A nil set of included tables will include

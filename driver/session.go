@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 // A SessionBuilder creates SQL sessions.

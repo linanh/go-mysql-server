@@ -4,10 +4,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dolthub/go-mysql-server/driver"
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/information_schema"
+	"github.com/linanh/go-mysql-server/driver"
+	"github.com/linanh/go-mysql-server/memory"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/information_schema"
 )
 
 type memTable struct {

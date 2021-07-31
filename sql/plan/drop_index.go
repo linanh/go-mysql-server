@@ -17,8 +17,8 @@ package plan
 import (
 	"gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/internal/similartext"
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/internal/similartext"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 var (

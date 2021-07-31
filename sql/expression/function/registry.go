@@ -17,9 +17,9 @@ package function
 import (
 	"math"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation/window"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression/function/aggregation"
+	"github.com/linanh/go-mysql-server/sql/expression/function/aggregation/window"
 )
 
 // Defaults is the function map with all the default functions.

@@ -265,7 +265,7 @@ func (pl *ProcessList) Kill(connID uint32) {
 
 	for pid, proc := range pl.procs {
 		if proc.Connection == connID {
-			logrus.Infof("kill query: pid %d", pid)
+			logrus.Infof("mysql/server kill query: pid %d", pid)
 			proc.Done()
 			delete(pl.procs, pid)
 		}

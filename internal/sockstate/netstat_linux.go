@@ -239,7 +239,7 @@ func init() {
 			isWSL = true
 		}
 	} else {
-		logrus.Warnf("Could not read /proc/sys/kernel/osrelease: %s", err.Error())
+		logrus.Warnf("mysql/server could not read /proc/sys/kernel/osrelease: %s", err.Error())
 		isProcBlocked = true
 	}
 }
@@ -248,7 +248,7 @@ func init() {
 // elements that satisfy the accept function
 func tcpSocks(accept AcceptFn) ([]sockTabEntry, error) {
 	if isWSL || isProcBlocked {
-		logrus.Warn("Connection checking not implemented for WSL")
+		logrus.Warn("mysql/server connection checking not implemented for WSL")
 		return nil, ErrSocketCheckNotImplemented.New()
 	}
 

@@ -26,8 +26,8 @@ import (
 	"github.com/dolthub/vitess/go/sqltypes"
 	errors "gopkg.in/src-d/go-errors.v1"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
 )
 
 // Table represents an in-memory database table.
@@ -58,6 +58,16 @@ type Table struct {
 	// AUTO_INCREMENT bookkeeping
 	autoIncVal interface{}
 	autoColIdx int
+
+	notify        Notify
+	disableNotify bool
+}
+
+//Insert, Update, Delete产生的事件通知
+type Notify interface {
+	Insert(tableName string, row sql.Row) error
+	Delete(tableName string, row sql.Row) error
+	Update(tableName string, oldRow sql.Row, newRow sql.Row) error
 }
 
 var _ sql.Table = (*Table)(nil)
@@ -456,6 +466,20 @@ func (t *Table) Insert(ctx *sql.Context, row sql.Row) error {
 	return inserter.Close(ctx)
 }
 
+// SetNotify for insert, update, delete
+func (t *Table) SetNotify(notify Notify) {
+	t.notify = notify
+	t.disableNotify = false
+}
+
+func (t *Table) DisableNotify() {
+	t.disableNotify = true
+}
+
+func (t *Table) EnableNotify() {
+	t.disableNotify = false
+}
+
 // Insert a new row into the table.
 func (t *tableEditor) Insert(ctx *sql.Context, row sql.Row) error {
 	if err := checkRow(t.table.schema, row); err != nil {
@@ -486,6 +510,10 @@ func (t *tableEditor) Insert(ctx *sql.Context, row sql.Row) error {
 			t.table.autoIncVal = row[idx]
 		}
 		t.table.autoIncVal = increment(t.table.autoIncVal)
+	}
+
+	if t.table.notify != nil && !t.table.disableNotify {
+		return t.table.notify.Insert(t.table.name, row)
 	}
 
 	return nil
@@ -589,6 +617,9 @@ func (t *tableEditor) Delete(ctx *sql.Context, row sql.Row) error {
 		return sql.ErrDeleteRowNotFound.New()
 	}
 
+	if t.table.notify != nil && !t.table.disableNotify {
+		return t.table.notify.Delete(t.table.name, row)
+	}
 	return nil
 }
 
@@ -622,6 +653,10 @@ func (t *tableEditor) Update(ctx *sql.Context, oldRow sql.Row, newRow sql.Row) e
 		if matches {
 			break
 		}
+	}
+
+	if t.table.notify != nil && !t.table.disableNotify {
+		return t.table.notify.Update(t.table.name, oldRow, newRow)
 	}
 
 	return nil

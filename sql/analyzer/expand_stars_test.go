@@ -17,11 +17,11 @@ package analyzer
 import (
 	"testing"
 
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
-	"github.com/dolthub/go-mysql-server/sql/expression/function/aggregation/window"
-	"github.com/dolthub/go-mysql-server/sql/plan"
+	"github.com/linanh/go-mysql-server/memory"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql/expression/function/aggregation/window"
+	"github.com/linanh/go-mysql-server/sql/plan"
 )
 
 func TestExpandStars(t *testing.T) {

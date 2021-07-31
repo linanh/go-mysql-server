@@ -14,7 +14,7 @@
 
 package enginetest
 
-import "github.com/dolthub/go-mysql-server/sql"
+import "github.com/linanh/go-mysql-server/sql"
 
 var JsonScripts = []ScriptTest{
 	{

@@ -24,9 +24,9 @@ import (
 	"github.com/dolthub/vitess/go/vt/proto/query"
 	"github.com/shopspring/decimal"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/enginetest"
-	"github.com/dolthub/go-mysql-server/sql"
+	sqle "github.com/linanh/go-mysql-server"
+	"github.com/linanh/go-mysql-server/enginetest"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 type memoryHarness struct {

@@ -26,7 +26,7 @@ import (
 // elements that satisfy the accept function
 func tcpSocks(accept AcceptFn) ([]sockTabEntry, error) {
 	// (juanjux) TODO: not implemented
-	logrus.Warn("Connection checking not implemented for Darwin")
+	logrus.Warn("mysql/server connection checking not implemented for Darwin")
 	return nil, ErrSocketCheckNotImplemented.New()
 }
 

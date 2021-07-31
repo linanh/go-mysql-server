@@ -20,7 +20,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/dolthub/go-mysql-server/internal/similartext"
+	"github.com/linanh/go-mysql-server/internal/similartext"
 )
 
 // IndexRegistry keeps track of all driver-provided indexes in the engine.
@@ -149,7 +149,7 @@ func (r *IndexRegistry) LoadIndexes(ctx *Context, dbs []Database) error {
 							r.statuses[k] = IndexReady
 						} else {
 							logrus.Warnf(
-								"index %q is outdated and will not be used, you can remove it using `DROP INDEX %s ON %s`",
+								"mysql/server index %q is outdated and will not be used, you can remove it using `DROP INDEX %s ON %s`",
 								idx.ID(),
 								idx.ID(),
 								idx.Table(),

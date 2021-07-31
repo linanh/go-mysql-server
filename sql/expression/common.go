@@ -15,7 +15,7 @@
 package expression
 
 import (
-	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql"
 )
 
 // IsUnary returns whether the expression is unary or not.
