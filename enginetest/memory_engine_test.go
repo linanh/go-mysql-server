@@ -480,12 +480,20 @@ func TestColumnDefaults(t *testing.T) {
 	enginetest.TestColumnDefaults(t, enginetest.NewDefaultMemoryHarness())
 }
 
+func TestDateParse(t *testing.T) {
+	enginetest.TestDateParse(t, enginetest.NewDefaultMemoryHarness())
+}
+
 func TestJsonScripts(t *testing.T) {
 	enginetest.TestJsonScripts(t, enginetest.NewDefaultMemoryHarness())
 }
 
 func TestShowTableStatus(t *testing.T) {
 	enginetest.TestShowTableStatus(t, enginetest.NewDefaultMemoryHarness())
+}
+
+func TestAddDropPks(t *testing.T) {
+	enginetest.TestAddDropPks(t, enginetest.NewDefaultMemoryHarness())
 }
 
 func unmergableIndexDriver(dbs []sql.Database) sql.IndexDriver {

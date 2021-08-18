@@ -1086,6 +1086,8 @@ func convertAlterIndex(ctx *sql.Context, ddl *sqlparser.DDL) (sql.Node, error) {
 			constraint = sql.IndexConstraint_Fulltext
 		case sqlparser.SpatialStr:
 			constraint = sql.IndexConstraint_Spatial
+		case sqlparser.PrimaryStr:
+			constraint = sql.IndexConstraint_Primary
 		default:
 			constraint = sql.IndexConstraint_None
 		}
@@ -1116,8 +1118,15 @@ func convertAlterIndex(ctx *sql.Context, ddl *sqlparser.DDL) (sql.Node, error) {
 			}
 		}
 
+		if constraint == sql.IndexConstraint_Primary {
+			return plan.NewAlterCreatePk(table, columns), nil
+		}
+
 		return plan.NewAlterCreateIndex(table, ddl.IndexSpec.ToName.String(), using, constraint, columns, comment), nil
 	case sqlparser.DropStr:
+		if ddl.IndexSpec.Type == sqlparser.PrimaryStr {
+			return plan.NewAlterDropPk(table), nil
+		}
 		return plan.NewAlterDropIndex(table, ddl.IndexSpec.ToName.String()), nil
 	case sqlparser.RenameStr:
 		return plan.NewAlterRenameIndex(table, ddl.IndexSpec.FromName.String(), ddl.IndexSpec.ToName.String()), nil
@@ -1452,7 +1461,40 @@ func convertInsert(ctx *sql.Context, i *sqlparser.Insert) (sql.Node, error) {
 		ignore = true
 	}
 
-	return plan.NewInsertInto(sql.UnresolvedDatabase(i.Table.Qualifier.String()), tableNameToUnresolvedTable(i.Table), src, isReplace, columnsToStrings(i.Columns), onDupExprs, ignore), nil
+	columnWithDefaultValues := make(map[int]bool)
+
+	if e, ok := src.(*plan.Values); ok {
+		for i, tuple := range e.ExpressionTuples {
+			var needCols []sql.Expression
+			for j, s := range tuple {
+				if _, ok := s.(*expression.DefaultColumn); ok {
+					columnWithDefaultValues[j] = true
+				} else {
+					needCols = append(needCols, s)
+				}
+			}
+
+			// Only re-assign if found column with default values
+			if len(columnWithDefaultValues) == 0 {
+				break
+			}
+
+			e.ExpressionTuples[i] = needCols
+		}
+	}
+
+	var columns []string
+	if len(columnWithDefaultValues) > 0 {
+		for i, c := range columnsToStrings(i.Columns) {
+			if _, found := columnWithDefaultValues[i]; !found {
+				columns = append(columns, c)
+			}
+		}
+	} else {
+		columns = columnsToStrings(i.Columns)
+	}
+
+	return plan.NewInsertInto(sql.UnresolvedDatabase(i.Table.Qualifier.String()), tableNameToUnresolvedTable(i.Table), src, isReplace, columns, onDupExprs, ignore), nil
 }
 
 func convertDelete(ctx *sql.Context, d *sqlparser.Delete) (sql.Node, error) {
