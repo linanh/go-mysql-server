@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/expression"
+	"github.com/linanh/go-mysql-server/sql"
+	"github.com/linanh/go-mysql-server/sql/expression"
 )
 
 // createTempDirAndFile returns the temporary directory, as well creates a new file (var filename) that lives in it.
