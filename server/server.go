@@ -15,6 +15,7 @@
 package server
 
 import (
+	"crypto/tls"
 	"net"
 	"time"
 
@@ -50,6 +51,10 @@ type Config struct {
 	ConnWriteTimeout time.Duration
 	// MaxConnections is the maximum number of simultaneous connections that the server will allow.
 	MaxConnections uint64
+	// TLSConfig is the configuration for TLS on this server. If |nil|, TLS is not supported.
+	TLSConfig *tls.Config
+	// RequestSecureTransport will require incoming connections to be TLS. Requires non-|nil| TLSConfig.
+	RequireSecureTransport bool
 	Listener       net.Listener
 }
 
@@ -120,6 +125,8 @@ func NewServer(cfg Config, e *sqle.Engine, sb SessionBuilder) (*Server, error) {
 	if cfg.Version != "" {
 		vtListnr.ServerVersion = cfg.Version
 	}
+	vtListnr.TLSConfig = cfg.TLSConfig
+	vtListnr.RequireSecureTransport = cfg.RequireSecureTransport
 
 	return &Server{Listener: vtListnr, h: handler}, nil
 }
